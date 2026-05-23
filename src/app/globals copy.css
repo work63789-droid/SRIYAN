@@ -7,22 +7,23 @@
    Aesthetic: Luxury Art Deco · Opulent Restraint
    ============================================================ */
 
+
 /* ── CSS Design Tokens ── */
 :root {
   /* Core palette */
-  --gold:          #c49a3c;
-  --gold-light:    #ddb95a;
-  --gold-bright:   #f0cc78;
-  --gold-dim:      #9a7428;
-  --gold-muted:    #7a5a1e;
-  --black:         #111009;
-  --black-soft:    #181610;
-  --black-card:    #201e16;
-  --black-border:  #2e2b1e;
-  --black-hover:   #252210;
-  --ivory:         #faf5ea;
-  --ivory-dim:     #e8dfc8;
-  --ivory-muted:   #b8a888;
+  --gold:          #ab8230;
+  --gold-light:    #c9a44a;
+  --gold-bright:   #d4af67;
+  --gold-dim:      #7a5e22;
+  --gold-muted:    #6b4e1a;
+  --black:         #020202;
+  --black-soft:    #0a0a0a;
+  --black-card:    #0f0f0f;
+  --black-border:  #1a1a1a;
+  --black-hover:   #141414;
+  --ivory:         #f5f0e8;
+  --ivory-dim:     #d8d0be;
+  --ivory-muted:   #a09080;
   --white:         #ffffff;
 
   /* Typography */
@@ -30,20 +31,9 @@
   --font-accent:  'Cinzel', serif;
   --font-body:    'DM Sans', sans-serif;
 
-  /* ── Spacing — PROPERLY SPLIT ──
-     Use these CSS variables directly on every section:
-       padding: var(--section-py) var(--section-px);
-     Or individually:
-       padding-top: var(--section-py);
-       padding-bottom: var(--section-py);
-       padding-left: var(--section-px);   ← applied via .section-container
-       padding-right: var(--section-px);  ← applied via .section-container
-  */
-  --section-py:     6rem;    /* vertical: top & bottom of every section */
-  --section-px:     clamp(1.5rem, 5vw, 5rem); /* horizontal: gutters */
-
-  /* Inner content max-width container gets its own horizontal pad */
-  --container-px:   clamp(1.25rem, 4vw, 4rem);
+  /* Spacing rhythm */
+  --section-py:   7rem;
+  --section-px:   clamp(1.5rem, 5vw, 6rem);
 
   /* Transitions */
   --ease-luxury:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -53,53 +43,19 @@
   --t-slow:       0.8s;
 
   /* Borders */
-  --border-gold:        1px solid rgba(196, 154, 60, 0.3);
-  --border-gold-bright: 1px solid rgba(196, 154, 60, 0.7);
+  --border-gold:  1px solid rgba(171, 130, 48, 0.3);
+  --border-gold-bright: 1px solid rgba(171, 130, 48, 0.7);
 
   /* Shadows */
-  --shadow-gold:  0 0 40px rgba(196, 154, 60, 0.15);
-  --shadow-card:  0 8px 48px rgba(0, 0, 0, 0.5);
-}
-
-/* ── Responsive spacing scale ──
-   Desktop  (>1024px): py=6rem  px=5rem
-   Tablet   (768-1024): py=5rem  px=3rem
-   Mobile-L (480-768):  py=4rem  px=1.5rem
-   Mobile-S (<480px):   py=3rem  px=1.25rem
-*/
-@media (max-width: 1024px) {
-  :root {
-    --section-py:   5rem;
-    --section-px:   clamp(1.5rem, 4vw, 3rem);
-    --container-px: clamp(1.25rem, 3vw, 3rem);
-  }
-}
-@media (max-width: 768px) {
-  :root {
-    --section-py:   4rem;
-    --section-px:   1.5rem;
-    --container-px: 1.25rem;
-  }
-  .display-hero {
-    font-size: clamp(2.8rem, 12vw, 4.5rem);
-  }
-  .display-xl {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-}
-@media (max-width: 480px) {
-  :root {
-    --section-py:   3rem;
-    --section-px:   1.25rem;
-    --container-px: 1rem;
-  }
+  --shadow-gold:  0 0 40px rgba(171, 130, 48, 0.12);
+  --shadow-card:  0 8px 48px rgba(0, 0, 0, 0.6);
 }
 
 /* ── Reset & Base ── */
 *, *::before, *::after {
   box-sizing: border-box;
-  /* margin: 0; */
-  /* padding: 0; */
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -120,14 +76,23 @@ body {
 }
 
 /* ── Custom Scrollbar ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--black); }
-::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dim);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(196, 154, 60, 0.28);
+  background: rgba(171, 130, 48, 0.25);
   color: var(--gold-bright);
 }
 
@@ -139,6 +104,7 @@ body {
   line-height: 0.95;
   letter-spacing: -0.02em;
 }
+
 .display-xl {
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 5vw, 5rem);
@@ -146,18 +112,21 @@ body {
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
+
 .display-lg {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 400;
   line-height: 1.1;
 }
+
 .display-md {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: 400;
   line-height: 1.2;
 }
+
 .label-accent {
   font-family: var(--font-accent);
   font-size: 0.7rem;
@@ -166,12 +135,14 @@ body {
   text-transform: uppercase;
   color: var(--gold);
 }
+
 .body-lg {
   font-size: 1.0625rem;
   font-weight: 300;
   line-height: 1.8;
   color: var(--ivory-dim);
 }
+
 .body-sm {
   font-size: 0.875rem;
   font-weight: 300;
@@ -183,10 +154,10 @@ body {
 .text-gold-gradient {
   background: linear-gradient(
     135deg,
-    var(--gold-dim)    0%,
+    var(--gold-dim) 0%,
     var(--gold-bright) 40%,
-    var(--gold-light)  60%,
-    var(--gold-dim)    100%
+    var(--gold-light) 60%,
+    var(--gold-dim) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -205,7 +176,7 @@ body {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(196,154,60,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(171, 130, 48, 0.5), transparent);
 }
 .ornament-diamond {
   width: 6px;
@@ -215,56 +186,11 @@ body {
   flex-shrink: 0;
 }
 
-/* ══════════════════════════════════════════════
-   SECTION & CONTAINER SYSTEM
-   ══════════════════════════════════════════════
-
-   Every <section> gets:
-     class="section-block"   → applies vertical padding only
-   
-   Inside every section, wrap content in:
-     <div class="section-container">  → applies horizontal padding + max-width
-
-   This way horizontal and vertical are always separate and controlled.
-
-   Usage in TSX:
-     <section id="services" className="section-block" style={{background:'var(--black-soft)'}}>
-       <div className="section-container">
-         ...content...
-       </div>
-     </section>
-*/
-
-/* Vertical padding only — applied to the <section> element */
-.section-block {
-  padding-top:    var(--section-py);
-  padding-bottom: var(--section-py);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Horizontal padding + max-width — applied to the inner wrapper div */
+/* ── Section Container ── */
 .section-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding-left:  var(--section-px);
-  padding-right: var(--section-px);
-}
-
-/* Narrow variant for centered content like headers, testimonials */
-.section-container--narrow {
-  max-width: 900px;
-  margin: 0 auto;
-  padding-left:  var(--section-px);
-  padding-right: var(--section-px);
-}
-
-/* Full-bleed inner panels (for grid blocks that touch section edges) */
-.section-container--flush {
-  max-width: 1400px;
-  margin: 0 auto;
-  /* No horizontal padding — panels touch the container edge,
-     individual cards handle their own internal padding */
+  padding: 0 var(--section-px);
 }
 
 /* ── Card Base ── */
@@ -278,7 +204,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(196,154,60,0.04) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(171,130,48,0.03) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -300,7 +226,11 @@ body {
   transition: opacity var(--t-slow) var(--ease-luxury),
               transform var(--t-slow) var(--ease-luxury);
 }
-.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .reveal-left {
   opacity: 0;
@@ -308,7 +238,10 @@ body {
   transition: opacity var(--t-slow) var(--ease-luxury),
               transform var(--t-slow) var(--ease-luxury);
 }
-.reveal-left.revealed { opacity: 1; transform: translateX(0); }
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 .reveal-right {
   opacity: 0;
@@ -316,15 +249,18 @@ body {
   transition: opacity var(--t-slow) var(--ease-luxury),
               transform var(--t-slow) var(--ease-luxury);
 }
-.reveal-right.revealed { opacity: 1; transform: translateX(0); }
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* Staggered delays */
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
-.delay-5 { transition-delay: 0.5s; }
-.delay-6 { transition-delay: 0.6s; }
+.delay-1  { transition-delay: 0.1s; }
+.delay-2  { transition-delay: 0.2s; }
+.delay-3  { transition-delay: 0.3s; }
+.delay-4  { transition-delay: 0.4s; }
+.delay-5  { transition-delay: 0.5s; }
+.delay-6  { transition-delay: 0.6s; }
 
 /* ── Button Styles ── */
 .btn-gold {
@@ -356,7 +292,7 @@ body {
   transition: opacity var(--t-med) var(--ease-luxury);
 }
 .btn-gold:hover::before { opacity: 1; }
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,154,60,0.45); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(171,130,48,0.4); }
 .btn-gold span { position: relative; z-index: 1; }
 
 .btn-outline {
@@ -372,7 +308,7 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 1px solid rgba(196,154,60,0.5);
+  border: 1px solid rgba(171,130,48,0.5);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -383,7 +319,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(196,154,60,0.08);
+  background: rgba(171,130,48,0.08);
   opacity: 0;
   transition: opacity var(--t-med) var(--ease-luxury);
 }
@@ -433,12 +369,14 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(196,154,60,0.18), rgba(17,16,9,0.4));
+  background: linear-gradient(135deg, rgba(171,130,48,0.15), rgba(2,2,2,0.4));
   opacity: 0;
   transition: opacity var(--t-med) var(--ease-luxury);
 }
 .img-hover-overlay:hover::after { opacity: 1; }
-.img-hover-overlay img { transition: transform 0.7s var(--ease-luxury); }
+.img-hover-overlay img {
+  transition: transform 0.7s var(--ease-luxury);
+}
 .img-hover-overlay:hover img { transform: scale(1.04); }
 
 /* ── Keyframe Animations ── */
@@ -446,30 +384,37 @@ body {
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
 @keyframes shimmer {
   0%   { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
+
 @keyframes rotateSlow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
+
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-10px); }
 }
+
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(196,154,60,0.2); }
-  50%       { box-shadow: 0 0 55px rgba(196,154,60,0.55); }
+  0%, 100% { box-shadow: 0 0 20px rgba(171,130,48,0.2); }
+  50%       { box-shadow: 0 0 50px rgba(171,130,48,0.5); }
 }
+
 @keyframes drawLine {
   from { width: 0; }
   to   { width: 100%; }
 }
+
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to   { opacity: 1; transform: scale(1); }
@@ -479,14 +424,15 @@ body {
 .hero-text-reveal {
   animation: fadeInUp 1.2s var(--ease-snap) both;
 }
+
 .gold-shimmer-text {
   background: linear-gradient(
     90deg,
-    var(--gold-dim)    0%,
+    var(--gold-dim) 0%,
     var(--gold-bright) 30%,
-    var(--ivory)       50%,
+    var(--ivory) 50%,
     var(--gold-bright) 70%,
-    var(--gold-dim)    100%
+    var(--gold-dim) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -497,10 +443,30 @@ body {
 
 /* ── Nav scroll state ── */
 .nav-scrolled {
-  background: rgba(17,16,9,0.94) !important;
+  background: rgba(2,2,2,0.95) !important;
   backdrop-filter: blur(20px);
   border-bottom: var(--border-gold) !important;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+}
+
+/* ── Responsive Utilities ── */
+@media (max-width: 768px) {
+  :root {
+    --section-py: 4rem;
+    --section-px: 1.25rem;
+  }
+  .display-hero {
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
+  }
+  .display-xl {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-py: 3rem;
+  }
 }
 
 /* ── Tailwind Layer Overrides ── */
@@ -525,7 +491,7 @@ body {
   .bg-gold          { background-color: var(--gold); }
   .bg-black-card    { background-color: var(--black-card); }
   .bg-black-soft    { background-color: var(--black-soft); }
-  .border-gold      { border-color: rgba(196,154,60,0.3); }
+  .border-gold      { border-color: rgba(171,130,48,0.3); }
   .font-display     { font-family: var(--font-display); }
   .font-accent      { font-family: var(--font-accent); }
 }
