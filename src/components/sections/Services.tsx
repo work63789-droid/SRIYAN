@@ -76,12 +76,6 @@ export default function Services() {
         </div>
 
         {/* ── Services Grid ── */}
-        {/*
-          Layout: asymmetric 2-column on desktop.
-          Row 1: wide card (col-span-2) + tall card
-          Row 2: tall card + wide card (col-span-2)
-          Row 3: full-width feature card
-        */}
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
           style={{ background: 'rgba(171,130,48,0.12)' }}
@@ -90,7 +84,7 @@ export default function Services() {
         >
           {SERVICES.map((service, i) => {
             const isHovered = hoveredId === service.id
-            const isWide = i === 0 || i === 5  // first and last span wider on large screens
+            const isWide = i === 0 || i === 5
             const delay = `${i * 0.08}s`
 
             return (
@@ -110,10 +104,10 @@ export default function Services() {
                 onMouseLeave={() => setHoveredId(null)}
                 aria-label={service.title}
               >
-                {/* Background Image */}
+                {/* Background Image — always visible, brightens on hover */}
                 <div
-                  className="absolute inset-0 transition-all duration-700"
-                  style={{ opacity: isHovered ? 1 : 0 }}
+                  className="absolute inset-0 transition-opacity duration-700"
+                  style={{ opacity: isHovered ? 1 : 0.35 }}
                   aria-hidden="true"
                 >
                   <Image
@@ -123,17 +117,22 @@ export default function Services() {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  {/* Overlay: heavier at rest so text stays readable, lighter on hover */}
                   <div
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(135deg, rgba(2,2,2,0.85) 0%, rgba(2,2,2,0.5) 100%)' }}
+                    className="absolute inset-0 transition-all duration-700"
+                    style={{
+                      background: isHovered
+                        ? 'linear-gradient(135deg, rgba(2,2,2,0.82) 0%, rgba(2,2,2,0.48) 100%)'
+                        : 'linear-gradient(135deg, rgba(2,2,2,0.78) 0%, rgba(2,2,2,0.65) 100%)',
+                    }}
                   />
                 </div>
 
-                {/* Static gradient overlay */}
+                {/* Gold tint overlay — fades out on hover (image takes over) */}
                 <div
-                  className="absolute inset-0 transition-opacity duration-500"
+                  className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(171,130,48,0.05) 0%, transparent 70%)',
+                    background: 'linear-gradient(135deg, rgba(171,130,48,0.08) 0%, transparent 70%)',
                     opacity: isHovered ? 0 : 1,
                   }}
                   aria-hidden="true"
@@ -149,7 +148,7 @@ export default function Services() {
                         fontFamily: 'var(--font-accent)',
                         fontSize: '0.65rem',
                         letterSpacing: '0.2em',
-                        color: isHovered ? 'var(--gold)' : 'rgba(171,130,48,0.4)',
+                        color: isHovered ? 'var(--gold)' : 'rgba(171,130,48,0.55)',
                       }}
                     >
                       {service.tag}
@@ -159,7 +158,7 @@ export default function Services() {
                         flex items-center justify-center w-9 h-9 border transition-all duration-300
                         ${isHovered
                           ? 'border-gold bg-gold text-black rotate-0 scale-100'
-                          : 'border-gold/20 text-gold/0 -rotate-45 scale-75'
+                          : 'border-gold/30 text-gold/0 -rotate-45 scale-75'
                         }
                       `}
                     >
@@ -175,7 +174,7 @@ export default function Services() {
                         fontFamily: 'var(--font-accent)',
                         fontSize: '0.6rem',
                         letterSpacing: '0.18em',
-                        color: isHovered ? 'var(--gold)' : 'var(--ivory-muted)',
+                        color: isHovered ? 'var(--gold)' : 'rgba(171,130,48,0.6)',
                         textTransform: 'uppercase',
                       }}
                     >
